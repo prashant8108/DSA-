@@ -1,0 +1,53 @@
+#include<bits/stdc++.h> 
+using namespace std; 
+class Graph00 
+{ 
+int V1; 
+list<int> 
+*adjc; 
+public: 
+Graph00(int V1); 
+void addEdge(int p, int q); 
+void DFS(int r); 
+}; 
+Graph00::Graph00(int V1) 
+{ 
+this->V1 = V1; 
+adjc = new list<int>[V1]; 
+} 
+void Graph00::addEdge(int p, int q) 
+{ 
+adjc[p].push_back(q); 
+} 
+void Graph00::DFS(int r) 
+{ 
+vector<bool> visited(V1, false); 
+stack<int> stack; 
+stack.push(r); 
+while (!stack.empty()) 
+{ 
+int r = 
+stack.top(); 
+stack.pop(); 
+if (!visited[r]) 
+{ 
+cout << r << " "; 
+visited[r] = true; 
+} 
+for (auto i = adjc[r].begin(); i != adjc[r].end(); ++i) 
+if (!visited[*i]) 
+stack.push(*i); 
+} 
+} 
+int main() 
+{ 
+Graph00 gf(5); 
+gf.addEdge(1, 0); 
+gf.addEdge(0, 2); 
+gf.addEdge(2, 1); 
+gf.addEdge(0, 3); 
+gf.addEdge(1, 4); 
+cout << "Depth First Traversal is shown below:\n"; 
+gf.DFS(0); 
+return 0; 
+} 
